@@ -15,17 +15,39 @@
             --border: #30363d;
             --font-mono: 'Courier New', Courier, monospace;
         }
-
+        #pre-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, #250126, #471e58, #360652);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        #pre-loader h2 {
+            font-size: 4rem;
+            font-weight: bold;
+            color: rgb(255, 255, 255);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: fadeInOut 2s infinite;
+        }
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background: linear-gradient(to right, #0e000f, #3f1b4e, #2e0247);
+            color: #f1f1f1;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; 
+            /* font-family: orbitron;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; */
             margin: 0;
             padding: 20px;
             display: flex;
             justify-content: center;
-            background-image: radial-gradient(rgba(0,0,0,0.3) 2px, transparent 2px);
-            background-size: 20px 20px;
         }
 
         .container {
@@ -100,8 +122,8 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
+            /* font-family: var(--font-mono); */
+            font-size: 0.95rem;
         }
 
         thead {
@@ -109,7 +131,7 @@
             color: var(--text-dim);
             text-align: left;
             text-transform: uppercase;
-            font-size: 0.75rem;
+            font-size: 0.85rem;
         }
 
         th, td {
@@ -122,18 +144,19 @@
         .dept-tag {
             padding: 3px 8px;
             border-radius: 4px;
-            font-size: 0.7rem;
+            font-size: 0.78rem;
             font-weight: bold;
             display: inline-block;
         }
         
-        .tag-arch { background: #8957e5; color: white; } /* Purple */
-        .tag-rro { background: #1f6feb; color: white; } /* Blue */
-        .tag-aed { background: #da3633; color: white; } /* Red */
-        .tag-iibo { background: #fff; color: #000; } /* White */
-        .tag-cisd { background: #d29922; color: #000; } /* Gold */
-        .tag-padl { background: #30363d; color: #8b949e; border: 1px solid #6e7681; } /* Grey */
-
+        .tag-arch { background: rgb(184, 181, 181); color: black; border: 2px solid rgb(153, 22, 43);}         
+        .tag-rro  { background: rgb(184, 181, 181); color: black;  border: 2px solid blueviolet;}                  
+        .tag-aed  { background: rgb(184, 181, 181); color: black;  border: 2px solid green;}                  
+        .tag-iibo  { background: rgb(184, 181, 181); color: black; border: 2px solid yellow;}               
+        .tag-cisd  { background: rgb(184, 181, 181); color: black; border: 2px solid rgb(115, 84, 19);}                  
+        .tag-padl  { background: rgb(184, 181, 181); color: black; border: 2px solid rgb(5, 77, 67);}                 
+        .tag-cd  { background: rgb(184, 181, 181); color: black; border: 2px solid aqua;}                 
+        
         /* LOCK SCREEN */
         .locked-view {
             position: relative;
@@ -200,16 +223,62 @@
             margin-top: 10px;
         }
 
+/* GLITCH EFFECT */
+.glitch-row td {
+    position: relative;
+    color: transparent;
+    user-select: none;
+}
+
+.glitch-row td::before,
+.glitch-row td::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    color: var(--text-main);
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.glitch-row td::before {
+    clip-path: inset(0 0 60% 0);
+    animation: glitchTop 1.2s infinite linear alternate-reverse;
+    color: #ff7b72;
+}
+
+.glitch-row td::after {
+    clip-path: inset(40% 0 0 0);
+    animation: glitchBottom 1.4s infinite linear alternate-reverse;
+    color: #58a6ff;
+}
+
+@keyframes glitchTop {
+    0% { transform: translate(0); opacity: 0.7; }
+    50% { transform: translate(-2px, -1px); opacity: 0.4; }
+    100% { transform: translate(2px, 1px); opacity: 0.8; }
+}
+
+@keyframes glitchBottom {
+    0% { transform: translate(0); opacity: 0.6; }
+    50% { transform: translate(2px, 1px); opacity: 0.3; }
+    100% { transform: translate(-1px, -2px); opacity: 0.7; }
+}
+
+ 
     </style>
 </head>
 <body>
-
+    <div id="pre-loader">
+        <h2 >📜 System Logs</h2>        
+    </div>
     <div class="container">
         <header>
-            <h1>System_Records_Archive</h1>
+            <h1>System_Records_Logs</h1>
             <div style="text-align: right; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-dim);">
-                SYSTEM DATE: DEC 28 2025<br>
-                STATUS: PRE-INCIDENT
+                SYSTEM DATE: Jan 1 2026<br>
+                STATUS: PRE-INCIDENT (1 month)
             </div>
         </header>
 
@@ -223,6 +292,7 @@
             <table>
                 <thead>
                     <tr>
+                        <th style="width: 120px;">DATE</th>
                         <th style="width: 120px;">TIME</th>
                         <th style="width: 100px;">SENDER</th>
                         <th style="width: 100px;">RECEIVER</th>
@@ -231,34 +301,319 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>09:12</td>
-                        <td><span class="dept-tag tag-arch">ARCH</span></td>
-                        <td><span class="dept-tag tag-rro">RRO</span></td>
-                        <td>Archival request for Reconstruction Test #2204. Awaiting metadata.</td>
+                        <td>1 Jan 2026</td>
+                        <td>21:12</td>
+                        <td><span class="dept-tag tag-cd">CD (Sameul)</span></td>
+                        <td><span class="dept-tag tag-cisd">CISD (James) </span></td>
+                        <td>Confirm neural-linked systems do not bypass containment firewalls during audits.</td>
                     </tr>
                     <tr>
+                        <td>2 Jan 2026</td>
                         <td>11:47</td>
-                        <td><span class="dept-tag tag-rro">RRO</span></td>
-                        <td><span class="dept-tag tag-aed">AED</span></td>
-                        <td>Notification: Minor pulse spill detected in Zone C-11.</td>
+                        <td><span class="dept-tag tag-cisd">CISD (James)</span></td>
+                        <td><span class="dept-tag tag-cd">CD (John)</span></td>
+                        <td>Bypass not detected. However, sustained load may introduce latency.</td>
                     </tr>
                     <tr>
+                        <td>2 Jan 2026</td>
+                        <td>19:14</td>
+                        <td><span class="dept-tag tag-cd">CD (Robin)</span></td>
+                        <td><span class="dept-tag tag-cd">CD (Robin)</span></td>
+                        <td>Automatically Generated Log: Submitting final reports of 2025 to CD on stability.</td>
+                    </tr>
+                    <tr>
+                        <td>3 Jan 2026</td>
                         <td>13:03</td>
-                        <td><span class="dept-tag tag-iibo">IIBO</span></td>
-                        <td><span class="dept-tag tag-cisd">CISD</span></td>
-                        <td>Request routine log verification for Gateway 64A.</td>
+                        <td><span class="dept-tag tag-arch">Archivist</span></td>
+                        <td><span class="dept-tag tag-rro">RRO (Jack)</span></td>
+                        <td>Archival request for Reconstruction Test #2201. Awaiting metadata.</td>
                     </tr>
                     <tr>
-                        <td>16:55</td>
-                        <td><span class="dept-tag tag-aed">AED</span></td>
-                        <td><span class="dept-tag tag-arch">ARCH</span></td>
+                        <td>3 Jan 2026</td>
+                        <td>02:00</td>
+                        <td><span class="dept-tag tag-arch">Archivist</span></td>
+                        <td><span class="dept-tag tag-arch">Archivist</span></td>
+                        <td>Automatically Generated Log: Report for Universe Y-90 successfully archived.</td>
+                    </tr>
+                    <tr>
+                        <td>4 Jan 2026</td>
+                        <td>22:00</td>
+                        <td><span class="dept-tag tag-rro">RRO (Jack)</span></td>
+                        <td><span class="dept-tag tag-aed">AED (Maya)</span></td>
+                        <td>Notification: Minor temporal pulse spill detected in Zone C-11.</td>
+                    </tr>
+                    <tr>
+                        <td>5 Jan 2026</td>
+                        <td>08:15</td>
+                        <td><span class="dept-tag tag-cd">CD(Sameul)</span></td>
+                        <td><span class="dept-tag tag-cd">CD(Sameul)</span></td>
+                        <td>Automatically Generated Log: Starting ProjectX for stablity check.</td>
+                    </tr>
+                    <tr>
+                        <td>6 Jan 2026</td>
+                        <td>19:26</td>
+                        <td><span class="dept-tag tag-rro">RRO (Jack)</span></td>
+                        <td><span class="dept-tag tag-aed">AED (Maya)</span></td>
+                        <td>Residual paradox trace identified. Cleanup advised.</td>
+                    </tr>
+                    <tr>
+                        <td>7 Jan 2026</td>
+                        <td>10:35</td>
+                        <td><span class="dept-tag tag-iibo">IIBO (Rowan)</span></td>
+                        <td><span class="dept-tag tag-cisd">CISD (Carl)</span></td>
+                        <td>Requesting routine log verification for Gateway 64A.</td>
+                    </tr>
+                    <tr>
+                        <td>7 Jan 2026</td>
+                        <td>13:55</td>
+                        <td><span class="dept-tag tag-cisd">CISD (Carl)</span></td>
+                        <td><span class="dept-tag tag-iibo">IIBO (Rowan)</span></td>
+                        <td>Request denied. Containment priority currently elevated.</td>
+                    </tr>
+                    <tr>
+                        <td>8 Jan 2026</td>
+                        <td>16:35</td>
+                        <td><span class="dept-tag tag-aed">AED (Isaac)</span></td>
+                        <td><span class="dept-tag tag-arch">Archivist</span></td>
                         <td>Cleanup records for Incident 44-B submitted.</td>
                     </tr>
                     <tr>
+                        <td>9 Jan 2026</td>
                         <td>19:12</td>
-                        <td><span class="dept-tag tag-arch">ARCH</span></td>
-                        <td><span class="dept-tag tag-padl">PADL</span></td>
-                        <td>Request clarification for anomaly tags in Run 558.</td>
+                        <td><span class="dept-tag tag-arch">Archivist</span></td>
+                        <td><span class="dept-tag tag-padl">PADL (Kiera)</span></td>
+                        <td>Clarification requested on anomaly tagging for Probability Run 553.</td>
+                    </tr>
+                    <tr>
+                        <td>10 Jan 2026</td>
+                        <td>13:03</td>
+                        <td><span class="dept-tag tag-arch">Archivist</span></td>
+                        <td><span class="dept-tag tag-arch">Archivist</span></td>
+                        <td>Automatically Generated Log: Report for Universe B-20 successfully archived.</td>
+                    </tr>
+                    <tr>
+                        <td>11 Jan 2026</td>
+                        <td>12:01</td>
+                        <td><span class="dept-tag tag-iibo">IIBO (Kiro)</span></td>
+                        <td><span class="dept-tag tag-cisd">CISD (Carl)</span></td>
+                        <td>Requesting encrypted gateway reroute logs for audit cross-check.</td>
+                    </tr>
+                    <tr>
+                        <td>11 Jan 2026</td>
+                        <td>19:12</td>
+                        <td><span class="dept-tag tag-cisd">CISD (Carl)</span></td>
+                        <td><span class="dept-tag tag-iibo">IIBO (Kiro)</span></td>
+                        <td>Access restricted. Query logged per protocol.</td>
+                    </tr>
+                    <tr>
+                        <td>12 Jan 2026</td>
+                        <td>15:32</td>
+                        <td><span class="dept-tag tag-rro">RRO (Johnny)</span></td>
+                        <td><span class="dept-tag tag-arch">Archivist</span></td>
+                        <td>Instability report merged: Universe U-9/B.</td>
+                    </tr>
+                    <tr>
+                        <td>13 Jan 2026</td>
+                        <td>13:42</td>
+                        <td><span class="dept-tag tag-padl">PADL (Kiera)</span></td>
+                        <td><span class="dept-tag tag-iibo">IIBO (Kiro)</span></td>
+                        <td>Standard advisory: Variance expected during end-cycle audit periods.</td>
+                    </tr>
+                    <tr>
+                        <td>14 Jan 2026</td>
+                        <td>08:15</td>
+                        <td><span class="dept-tag tag-aed">AED (Mike)</span></td>
+                        <td><span class="dept-tag tag-rro">RRO (Alice)</span></td>
+                        <td>Field signature mismatch logged for recent reconstruction pass.</td>
+                    </tr>
+                    <tr>
+                        <td>15 Jan 2026</td>
+                        <td>05:27</td>
+                        <td><span class="dept-tag tag-iibo">IIBO (Rowan)</span></td>
+                        <td><span class="dept-tag tag-padl">PADL (Kiera)</span></td>
+                        <td>Requesting anomaly forecasting ahead of upcoming audit.</td>
+                    </tr>
+                    <tr>
+                        <td>15 Jan 2026</td>
+                        <td>06:12</td>
+                        <td><span class="dept-tag tag-padl">PADL (Kiera)</span></td>
+                        <td><span class="dept-tag tag-iibo">IIBO (Rowan)</span></td>
+                        <td>Forecasts currently unstable. Cross-signals unresolved.</td>
+                    </tr>
+                    <tr>
+                        <td>16 Jan 2026</td>
+                        <td>14:55</td>
+                        <td><span class="dept-tag tag-aed">AED (Isaac)</span></td>
+                        <td><span class="dept-tag tag-arch">Archivist</span></td>
+                        <td>Cleanup records for Incident 44-B submitted.</td>
+                    </tr>
+                    <tr>
+                        <td>17 Jan 2026</td>
+                        <td>15:12</td>
+                        <td><span class="dept-tag tag-aed">AED (Isaac)</span></td>
+                        <td><span class="dept-tag tag-arch">Archivist</span></td>
+                        <td>Cleanup logs uploaded for Sector E.</td>
+                    </tr>
+                    <tr>
+                        <td>18 Jan 2026</td>
+                        <td>09:25</td>
+                        <td><span class="dept-tag tag-arch">Archivist</span></td>
+                        <td><span class="dept-tag tag-padl">PADL (Bob)</span></td>
+                        <td>Request recalculation on probability divergence for early-Feb sweep window.</td>
+                    </tr>
+                    <tr>
+                        <td>19 Jan 2026</td>
+                        <td>18:00</td>
+                        <td><span class="dept-tag tag-cd">CD (Sameul)</span></td>
+                        <td><span class="dept-tag tag-iibo">IIBO (Kiro)</span></td>
+                        <td>Containment posture review completed. No violations noted, though audit parameters appear unusually broa.</td>
+                    </tr>
+                    <tr>
+                        <td>20 Jan 2026</td>
+                        <td>18:15</td>
+                        <td><span class="dept-tag tag-iibo">IIBO (Kiro)</span></td>
+                        <td><span class="dept-tag tag-cd">CD (Sameul)</span></td>
+                        <td>Acknowledged. Broad scope intentional due to cross-department inconsistencies.</td>
+                    </tr>
+                    <tr>
+                        <td>21 Jan 2026</td>
+                        <td>19:12</td>
+                        <td><span class="dept-tag tag-iibo">IIBO (Kiro)</span></td>
+                        <td><span class="dept-tag tag-cd">CD (Sameul)</span></td>
+                        <td>Request clarification on audit endpoints to avoid unnecessary containment triggers.</td>
+                    </tr>
+                    <tr>
+                        <td>22 Jan 2026</td>
+                        <td>09:14</td>
+                        <td><span class="dept-tag tag-cd">CD (Robin)</span></td>
+                        <td><span class="dept-tag tag-iibo">IIBO (Rowan)</span></td>
+                        <td>Endpoints unresolved. Proceed assuming full-spectrum exposure.</td>
+                    </tr>
+                    <tr>
+                        <td>23 Jan 2026</td>
+                        <td>10:50</td>
+                        <td><span class="dept-tag tag-aed">PADL (Henry)</span></td>
+                        <td><span class="dept-tag tag-iibo">IIBO (Kiro)</span></td>
+                        <td>Minor variance clustering observed. Monitoring only.</td>
+                    </tr>
+                    <tr>
+                        <td>24 Jan 2026</td>
+                        <td>19:56</td>
+                        <td><span class="dept-tag tag-iibo">IIBO (Kiro)</span></td>
+                        <td><span class="dept-tag tag-cisd">CISD (Carl)</span></td>
+                        <td>Requesting encrypted gateway reroute logs for audit cross-check.</td>
+                    </tr>
+                    <tr>
+                        <td>24 Jan 2026</td>
+                        <td>20:12</td>
+                        <td><span class="dept-tag tag-cisd">CISD (Carl)</span></td>
+                        <td><span class="dept-tag tag-iibo">IIBO (Kiro)</span></td>
+                        <td>Access restricted. Query logged per protocol.</td>
+                    </tr>
+                    <tr>
+                        <td>25 Jan 2026</td>
+                        <td>09:16</td>
+                        <td><span class="dept-tag tag-cd">CD (Sameul)</span></td>
+                        <td><span class="dept-tag tag-aed">AED (Maya)</span></td>
+                        <td>If containment breach occurs, confirm erasure response time estimates.</td>
+                    </tr>
+                    <tr>
+                        <td>25 Jan 2026</td>
+                        <td>21:00</td>
+                        <td><span class="dept-tag tag-aed">AED (Maya)</span></td>
+                        <td><span class="dept-tag tag-cd">CD (Sameul)</span></td>
+                        <td>Initial containment within minutes. Full erasure contingent on authorization.</td>
+                    </tr>
+                    <tr>
+                        <td>26 Jan 2026</td>
+                        <td>19:28</td>
+                        <td><span class="dept-tag tag-iibo">IIBO (Kiro)</span></td>
+                        <td><span class="dept-tag tag-cisd">CISD (James)</span></td>
+                        <td>Requesting encrypted gateway reroute logs for audit cross-check.</td>
+                    </tr>
+                    <tr>
+                        <td>27 Jan 2026</td>
+                        <td>11:00</td>
+                        <td><span class="dept-tag tag-cisd">CISD (Carl)</span></td>
+                        <td><span class="dept-tag tag-iibo">IIBO (Kiro)</span></td>
+                        <td>Access restricted. Query logged per protocol.</td>
+                    </tr>
+                    <tr>
+                        <td>27 Jan 2026</td>
+                        <td>19:34</td>
+                        <td><span class="dept-tag tag-aed">AED (Maya)</span></td>
+                        <td><span class="dept-tag tag-aed">AED (internal)</span></td>
+                        <td>Review erasure timelines prior to February operations.</td>
+                    </tr>
+                    <tr>
+                        <td>28 Jan 2026</td>
+                        <td>12:12</td>
+                        <td><span class="dept-tag tag-rro">RRO (Alice)</span></td>
+                        <td><span class="dept-tag tag-padl">PADL (Bob)</span></td>
+                        <td>Requesting probability bounds for extended reconstruction runs.</td>
+                    </tr>
+                    <tr>
+                        <td>28 Jan 2026</td>
+                        <td>13:16</td>
+                        <td><span class="dept-tag tag-iibo">IIBO (Kiro)</span></td>
+                        <td><span class="dept-tag tag-cisd">CISD (James)</span></td>
+                        <td>Requesting encrypted gateway reroute logs for audit cross-check.</td>
+                    </tr>
+                    <tr>
+                        <td>28 Jan 2026</td>
+                        <td>15:12</td>
+                        <td><span class="dept-tag tag-cisd">CISD (James)</span></td>
+                        <td><span class="dept-tag tag-iibo">IIBO (Kiro)</span></td>
+                        <td>Access Granted.</td>
+                    </tr>
+                    <tr>
+                        <td>29 Jan 2026</td>
+                        <td>09:22</td>
+                        <td><span class="dept-tag tag-padl">PADL (Bob)</span></td>
+                        <td><span class="dept-tag tag-rro">RRO (Alice)</span></td>
+                        <td>Bounds approved. Avoid cross-phase harmonics.</td>
+                    </tr>
+                    <tr>
+                        <td>30 Jan 2026</td>
+                        <td>10:09</td>
+                        <td><span class="dept-tag tag-arch">Archivist</span></td>
+                        <td><span class="dept-tag tag-rro">RRO (Johnny)</span></td>
+                        <td>Archival request for Reconstruction Test #2209. Awaiting metadata.</td>
+                    </tr>
+                    <tr>
+                        <td>30 Jan 2026</td>
+                        <td>12:47</td>
+                        <td><span class="dept-tag tag-iibo">IIBO (Kiro)</span></td>
+                        <td><span class="dept-tag tag-cisd">CISD (Carl)</span></td>
+                        <td>Requesting confirmation: legacy gateway logs retained?”</td>
+                    </tr>
+                    <tr>
+                        <td>31 Jan 2026</td>
+                        <td>08:11</td>
+                        <td><span class="dept-tag tag-padl">CISD (Carl)</span></td>
+                        <td><span class="dept-tag tag-rro">RRO (Alice)</span></td>
+                        <td>Retention confirmed. Access unchange.</td>
+                    </tr>
+                    <tr>
+                        <td>31 Jan 2026</td>
+                        <td>22:25</td>
+                        <td><span class="dept-tag tag-aed">AED (Mike)</span></td>
+                        <td><span class="dept-tag tag-arch">Archivist</span></td>
+                        <td>Minor cleanup scheduled. No anomalies flagged.</td>
+                    </tr>
+                    <tr>
+                        <td>1 Feb 2026</td>
+                        <td>10:11</td>
+                        <td><span class="dept-tag tag-cd">CD (John)</span></td>
+                        <td><span class="dept-tag tag-padl">PADL (Henry)</span></td>
+                        <td>Seeking probability tolerance limits should containment escalation be required during audit window.</td>
+                    </tr>
+                    <tr>
+                        <td>1 Feb 2026</td>
+                        <td>11:27</td>
+                        <td><span class="dept-tag tag-padl">PADL (Henry)</span></td>
+                        <td><span class="dept-tag tag-cd">CD (John)</span></td>
+                        <td>Limits provided. Recommend restraint—escalation may destabilize adjacent projections.</td>
                     </tr>
                 </tbody>
             </table>
@@ -269,20 +624,22 @@
                 
                 <div class="blur-content">
                     <table>
-                        <thead><tr><th>TIME</th><th>SENDER</th><th>RECEIVER</th><th>MESSAGE</th></tr></thead>
+                        <thead><tr>
+                            <th>DATE</th><th>TIME</th><th>SENDER</th><th>RECEIVER</th><th>MESSAGE</th>
+                        </tr></thead>
                         <tbody>
-                            <tr><td>09:12</td><td>ARCH</td><td>RRO</td><td>████████████████████</td></tr>
-                            <tr><td>11:47</td><td>RRO</td><td>AED</td><td>Residual paradox trace found.</td></tr>
-                            <tr><td>13:03</td><td>CISD</td><td>IIBO</td><td>DENIED. PRIORITY HIGH.</td></tr>
-                            <tr><td>14:32</td><td>PADL</td><td>SAMUEL</td><td>████████████████████</td></tr>
-                            <tr><td>16:55</td><td>AED</td><td>ARCH</td><td>Erase signatures.</td></tr>
+                            <tr><td>28 Dec</td><td>13:03</td><td>CISD</td><td>IIBO</td><td>DENIED. PRIORITY HIGH.</td></tr>
+                            <tr><td>28 Dec</td><td>14:32</td><td>PADL</td><td>SAMUEL</td><td>████████████████████</td></tr>
+                            <tr><td>28 Dec</td><td>13:03</td><td>CISD</td><td>IIBO</td><td>DENIED. PRIORITY HIGH.</td></tr>
+                            <tr><td>28 Dec</td><td>14:32</td><td>PADL</td><td>SAMUEL</td><td>████████████████████</td></tr>
+                            <tr><td>28 Dec</td><td>16:55</td><td>AED</td><td>Archivist</td><td>Erase signatures.</td></tr>
                         </tbody>
                     </table>
                 </div>
 
                 <div class="lock-interface">
                     <span style="font-size: 3rem;">🔒</span>
-                    <h3>ENCRYPTED PARTITION</h3>
+                    <h3>PRIVATE LOGS</h3>
                     <p style="color: #8b949e; font-size: 0.9rem;">Supervisor clearance required.</p>
                     <button class="puzzle-btn" onclick="openPuzzle()">DECRYPT LOGS</button>
                 </div>
@@ -295,6 +652,7 @@
                 <table>
                     <thead>
                         <tr>
+                            <th style="width: 120px;">DATE</th>
                             <th style="width: 120px;">TIME</th>
                             <th style="width: 100px;">SENDER</th>
                             <th style="width: 100px;">RECEIVER</th>
@@ -303,34 +661,159 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td style="color: var(--text-dim);">09:12</td>
-                            <td><span class="dept-tag tag-arch">ARCH</span></td>
-                            <td><span class="dept-tag tag-rro">RRO</span></td>
-                            <td style="color: #a5d6ff;">"Seal Test #2204. Do NOT cross-index with IIBO."</td>
+                            <td>1 Jan 2026</td><td>09:12</td>
+                            <td><span class="dept-tag tag-cd">CD (John)</span></td>
+                            <td><span class="dept-tag tag-iibo">IIBO (Rowan)</span></td>
+                            <td>Observing the anomaly in Sector 7. Do you confirm the projection stability?</td>
                         </tr>
                         <tr>
-                            <td style="color: var(--text-dim);">11:47</td>
-                            <td><span class="dept-tag tag-rro">RRO</span></td>
-                            <td><span class="dept-tag tag-aed">AED</span></td>
-                            <td style="color: #ff7b72;">"Residual paradox trace. Need quiet cleanup."</td>
+                            <td>1 Jan 2026</td><td>09:12</td>
+                            <td><span class="dept-tag tag-iibo">IIBO (Rowan)</span></td>
+                            <td><span class="dept-tag tag-cd">CD (John)</span></td>
+                            <td>Projection stable for now. Keep monitoring; deviations spike at odd intervals.</td>
                         </tr>
                         <tr>
-                            <td style="color: var(--text-dim);">13:03</td>
-                            <td><span class="dept-tag tag-cisd">CISD</span></td>
-                            <td><span class="dept-tag tag-iibo">IIBO</span></td>
-                            <td style="font-weight: bold;">"Denied. Containment priority: high."</td>
+                            <td>12 Jan 2026</td><td>09:12</td>
+                            <td><span class="dept-tag tag-rro">RRO (Jack)</span></td>
+                            <td><span class="dept-tag tag-aed">AED (Maya)</span></td>
+                            <td>X-52 collapsed faster than projected. Frequencies are bleeding across layers. I don’t care how — clean it. Now.</td>
                         </tr>
                         <tr>
-                            <td style="color: var(--text-dim);">14:32</td>
-                            <td><span class="dept-tag tag-padl">PADL</span></td>
-                            <td><span class="dept-tag tag-cisd">SAMUEL</span></td>
-                            <td style="color: #d29922;">"Probability variance rising in Eastern Branch Logs."</td>
+                            <td>12 Jan 2026</td><td>11:47</td>
+                            <td><span class="dept-tag tag-aed">AED (Maya)</span></td>
+                            <td><span class="dept-tag tag-rro">RRO (Jack)</span></td>
+                            <td>That universe was never authorized for live reconstruction. You pushed it past safe bounds.</td>
                         </tr>
                         <tr>
-                            <td style="color: var(--text-dim);">16:55</td>
-                            <td><span class="dept-tag tag-aed">AED</span></td>
-                            <td><span class="dept-tag tag-arch">ARCH</span></td>
-                            <td style="color: #da3633;">"Erase secondary signatures. Routine."</td>
+                            <td>12 Jan 2026</td><td>09:12</td>
+                            <td><span class="dept-tag tag-rro">RRO (Jack)</span></td>
+                            <td><span class="dept-tag tag-aed">AED (Maya)</span></td>
+                            <td>Spare me ethics lecture please.</td>
+                        </tr>
+                        <tr>
+                            <td>12 Jan 2026</td><td>11:47</td>
+                            <td><span class="dept-tag tag-iibo">IIBO (Kiro)</span></td>
+                            <td><span class="dept-tag tag-arch">Archivist</span></td>
+                            <td>I’m seeing abnormal frequency spikes tied to Universe X-52. The data is inconsistent — it exists, then vanishes. I need its current archival status.</td>
+                        </tr>
+                        <tr>
+                            <td>12 Jan 2026</td><td>11:47</td>
+                            <td><span class="dept-tag tag-aed">AED (Maya)</span></td>
+                            <td><span class="dept-tag tag-rro">RRO (Jack)</span></td>
+                            <td>Initiating full erasure sweep. No residuals. No archive trail.</td>
+                        </tr>
+                        <tr>
+                            <td>12 Jan 2026</td><td>11:47</td>
+                            <td><span class="dept-tag tag-aed">AED (Maya)</span></td>
+                            <td><span class="dept-tag tag-rro">RRO (Jack)</span></td>
+                            <td>Erasure complete. X-52 never existed. Frequencies normalized. One day, this will catch up to you.</td>
+                        </tr>
+                        <tr>
+                            <td>12 Jan 2026</td><td>11:47</td>
+                            <td><span class="dept-tag tag-arch">Archivist</span></td>
+                            <td><span class="dept-tag tag-iibo">IIBO (Kiro)</span></td>
+                            <td>Nothing found in the archives, must be a fluctuation!</td>
+                        </tr>
+                        <tr>
+                            <td>16 Jan 2026</td><td>11:47</td>
+                            <td><span class="dept-tag tag-arch">Archivist</span></td>
+                            <td><span class="dept-tag tag-rro">RRO (Jack)</span></td>
+                            <td>Logs from the midnight cycle are missing. Was deletion manual or automated?</td>
+                        </tr>
+                        <tr>
+                            <td>16 Jan 2026</td><td>11:47</td>
+                            <td><span class="dept-tag tag-rro">RRO (Jack)</span></td>
+                            <td><span class="dept-tag tag-arch">Archivist</span></td>
+                            <td>Unknown. Checking integrity now.</td>
+                        </tr>
+                        <tr>
+                            <td>25 Jan 2026</td><td>11:47</td>
+                            <td><span class="dept-tag tag-iibo">IIBO (Kiro)</span></td>
+                            <td><span class="dept-tag tag-aed">AED (Maya)</span></td>
+                            <td>Frequency spikes observed near interface. Do you authorize intervention?</td>
+                        </tr>
+                        <tr>
+                            <td>26 Jan 2026</td><td>11:47</td>
+                            <td><span class="dept-tag tag-cisd">CISD (Carl)</span></td>
+                            <td><span class="dept-tag tag-iibo">IIBO (James)</span></td>
+                            <td>Patterns in logs suggest interference from unknown channel. Investigate quietly.</td>
+                        </tr>
+                        <tr>
+                            <td>26 Jan 2026</td><td>11:47</td>
+                            <td><span class="dept-tag tag-iibo">IIBO (James)</span></td>
+                            <td><span class="dept-tag tag-cisd">CISD (Carl)</span></td>
+                            <td>Quietly done. No alerts triggered. Keep it off the record.</td>
+                        </tr>
+                        <tr>
+                            <td>26 Jan 2026</td><td>11:47</td>
+                            <td><span class="dept-tag tag-aed">AED (Maya)</span></td>
+                            <td><span class="dept-tag tag-iibo">IIBO (Kiro)</span></td>
+                            <td>Proceed cautiously. Full erasure not yet authorized.</td>
+                        </tr>
+                        <tr>
+                            <td>30 Jan 2026</td><td>11:47</td>
+                            <td><span class="dept-tag tag-arch">Archivist</span></td>
+                            <td><span class="dept-tag tag-aed">AED (Isaac)</span></td>
+                            <td>Anomalies in erased data detected. Could be residual echo. Kindly check.</td>
+                        </tr>
+                        <tr>
+                            <td>31 Jan 2026</td><td>11:47</td>
+                            <td><span class="dept-tag tag-aed">AED (Isaac)</span></td>
+                            <td><span class="dept-tag tag-arch">Archivist</span></td>
+                            <td>Fixed!!</td>
+                        </tr>
+                        <tr>
+                            <td>2 Feb 2026</td><td>23:10</td>
+                            <td><span class="dept-tag tag-cd">CD (Sameul)</span></td>
+                            <td><span class="dept-tag tag-cisd">CISD (Carl)</span></td>
+                            <td>Requesting confirmation: emergency containment locks can be enforced without PADL concurrence.</td>
+                        </tr><tr>
+                            <td>28 Dec</td><td>11:47</td>
+                            <td><span class="dept-tag tag-cisd">CISD (Carl)</span></td>
+                            <td><span class="dept-tag tag-cd">CD (Sameul)</span></td>
+                            <td>Confirmed. Manual override possible with Director-level authorization.</td>
+                        </tr>
+                        <tr>
+                            <td>2 Feb 2026</td><td>23:00</td>
+                            <td><span class="dept-tag tag-arch">IIBO (Kiro)</span></td>
+                            <td><span class="dept-tag tag-iibo">IIBO (Kiro)</span></td>
+                            <td>Initiates deep neural audit session; connects dual-channel neural implant to Board network.</td>
+                        </tr>
+                        <tr>
+                            <td>2 Feb 2026</td><td>23:10</td>
+                            <td><span class="dept-tag tag-cd">CD (Sameul)</span></td>
+                            <td><span class="dept-tag tag-iibo">IIBO (Kiro)</span></td>
+                            <td>Containment Patch with adaptive shutdown modifier deployed</td>
+                        </tr>
+                        <tr>
+                            <td>2 Feb 2026</td><td>23:18</td>
+                            <td><span class="dept-tag tag-rro">RRO (Jack)</span></td>
+                            <td><span class="dept-tag tag-iibo">IIBO (Kiro)</span></td>
+                            <td>Reconstruction pulse disguised as stabilization burst</td>
+                        </tr>
+                        <tr>
+                            <td>2 Feb 2026</td><td>23:19</td>
+                            <td><span class="dept-tag tag-aed">AED (Maya)</span></td>
+                            <td><span class="dept-tag tag-aed">AED (Maya)</span></td>
+                            <td>Automatically Generated Log: Project Mirage safeguard activated. For twelve seconds, RRO will be vanished from Echo’s interface.</td>
+                        </tr>
+                        <tr>
+                            <td>2 Feb 2026</td><td>23:29</td>
+                            <td><span class="dept-tag tag-aed">AED (Isaac)</span></td>
+                            <td><span class="dept-tag tag-aed">AED (Isaac)</span></td>
+                            <td>Automatically Generated Log: Reports submiitted: no anomilies in January erasures.</td>
+                        </tr>
+                        <tr>
+                            <td>2 Feb 2026</td><td>23:31</td>
+                            <td><span class="dept-tag tag-arch">IIBO (Kiro)</span></td>
+                            <td><span class="dept-tag tag-iibo">IIBO (Kiro)</span></td>
+                            <td>Unexpected spike; node flagged for overload pattern.</td>
+                        </tr>
+                        <tr>
+                            <td>2 Feb 2026</td><td>23:31</td>
+                            <td><span class="dept-tag tag-arch">Archivist</span></td>
+                            <td><span class="dept-tag tag-iibo">IIBO (Kiro)</span></td>
+                            <td>Corrupted firmware executes when Echo opens audit node.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -351,6 +834,55 @@
     </div>
 
     <script>
+        // SECURITY MEASURES - Anti-cheat protection
+        (function() {
+            // Disable right-click
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                return false;
+            });
+            
+            // Disable keyboard shortcuts for DevTools
+            document.addEventListener('keydown', function(e) {
+                // F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C, Ctrl+U
+                if (e.keyCode === 123 || 
+                    (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) ||
+                    (e.ctrlKey && e.keyCode === 85)) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    alert('Developer tools are disabled for this competition.');
+                    return false;
+                }
+            });
+            
+            // Hide anti-cheat overlay after 2 seconds
+            setTimeout(function() {
+                document.getElementById('anti-cheat').style.display = 'none';
+            }, 2000);
+            
+            // Detect if DevTools is open (basic detection)
+            setInterval(function() {
+                const widthThreshold = window.outerWidth - window.innerWidth > 160;
+                const heightThreshold = window.outerHeight - window.innerHeight > 160;
+                
+                if (widthThreshold || heightThreshold) {
+                    document.getElementById('anti-cheat').style.display = 'flex';
+                    document.body.innerHTML = '<h1 style="color:red;text-align:center;margin-top:50px;">Developer tools detected! Competition integrity compromised.</h1>';
+                }
+            }, 1000);
+        })();
+
+        // Preloader Logic
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('pre-loader');
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                    document.body.style.opacity = '1';
+                }, 600); // Fade out duration
+            }, 2200); // Preloader display duration
+        });
         function switchTab(type) {
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active', 'active-private'));
             document.querySelectorAll('.log-container').forEach(c => c.classList.remove('active'));
@@ -380,6 +912,42 @@
             }
         }
         window.onclick = e => { if(e.target == modal) modal.style.display = 'none'; }
+           
+function applyGlitchToRows(rowIndexes) {
+    const rows = document.querySelectorAll("#private-logs tbody tr");
+
+    rowIndexes.forEach(i => {
+        if (i < 0 || i >= rows.length) return;
+
+        const cells = rows[i].querySelectorAll("td");
+        cells.forEach(cell => {
+            // Hide original text AND all children
+            cell.style.color = 'transparent';
+            cell.style.position = 'relative';
+            cell.style.userSelect = 'text';
+
+            // Hide any nested elements like <span> visually
+            cell.querySelectorAll('*').forEach(el => el.style.display = 'none');
+
+            // Generate corrupted version
+            let original = cell.innerText;
+            let corrupted = original
+                .split('')
+                .map(c => (c === ' ' || Math.random() < 0.4 ? c : '█')) // some letters survive
+                .join('');
+
+            cell.setAttribute('data-text', corrupted);
+            // Keep one invisible character so ::before/::after show
+            cell.innerText = '\u200B'; // zero-width space
+            cell.style.color = 'transparent';
+            cell.style.userSelect = 'text'; // so glitch is selectable
+        });
+
+        rows[i].classList.add("glitch-row");
+    });
+}
+
+applyGlitchToRows([24, 25, 26, 29, 30]);
     </script>
 </body>
 </html>
