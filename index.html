@@ -640,7 +640,7 @@
                 <div class="lock-interface">
                     <span style="font-size: 3rem;">🔒</span>
                     <h3>PRIVATE LOGS</h3>
-                    <p style="color: #8b949e; font-size: 0.9rem;">Supervisor clearance required.</p>
+                    <p style="color: #8b949e; font-size: 0.9rem;">Authorized Access Only</p>
                     <button class="puzzle-btn" onclick="openPuzzle()">DECRYPT LOGS</button>
                 </div>
             </div>
@@ -850,7 +850,11 @@
     <div class="modal" id="puzzle-modal">
         <div class="modal-content">
             <h2>Verify Credentials</h2>
-            <p style="color: #d29922; font-style: italic;">"I have cities, but no houses. I have mountains, but no trees. What am I?"</p>
+            <p style="color: #d29922; font-style: italic;">"I record what happens,
+                but I am not the event.
+                I remain when memory fails,
+                yet vanish when erased."
+            </p>
             <input type="text" id="puzzle-answer" placeholder="Enter Answer...">
             <p id="error-msg" style="color: #da3633; display: none; margin-top: 10px;">ACCESS DENIED</p>
             <div style="margin-top: 20px; text-align: right;">
@@ -924,7 +928,7 @@
         }
 
         const modal = document.getElementById('puzzle-modal');
-        const PUZZLE_ANSWER = "MAP";
+        const PUZZLE_ANSWER = "LOG";
 
         function openPuzzle() { modal.style.display = 'flex'; document.getElementById('puzzle-answer').focus(); }
         function checkAnswer() {
@@ -986,3 +990,4 @@ applyGlitchToRows([28, 29, 30, 33, 34]);
     </script>
 </body>
 </html>
+
